@@ -22,5 +22,5 @@ jobs:
       - name: Lint with yamllint and ansible-lint
         run: |
           cd ansible-ipi-install
-          yamllint
-          ansible-lint .
+          yamllint .
+          ansible-lint
