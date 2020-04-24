@@ -7,8 +7,13 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    steps:
 
+    defaults:
+      run:
+        shell: bash
+        working-directory: ansible-ipi-install
+
+    steps:
       - uses: actions/checkout@v2
 
       - name: Set up Python ${{ matrix.python_version }}
@@ -19,7 +24,9 @@ jobs:
       - name: Install ansible and dependencies.
         run: pip install ansible yamllint ansible-lint
 
-      - name: Lint with yamllint and ansible-lint
-        run: |
-          cd ansible-ipi-install
-          yamllint .; ansible-lint
+      - name: Lint with yamllint
+        run: yamllint .
+
+      - name: Lint with ansible-lint
+        run: ansible-lint
+        if: always()
